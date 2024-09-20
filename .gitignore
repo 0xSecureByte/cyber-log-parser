@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+env/
+venv/
+*.egg-info/
+*.log
+myenv/
+
+# Rust
+rust/target/
+rust/Cargo.lock
