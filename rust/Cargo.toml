@@ -3,4 +3,11 @@ name = "rust"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+crate-type = ["cdylib"]  # Build as a dynamic library
+
 [dependencies]
+pyo3 = { version = "0.22.3", features = ["extension-module"] }  # Add PyO3 dependency
+
+[build]
+rustflags = ["-C", "link-arg=-undefined", "-C", "link-arg=dynamic_lookup", "-C", "target-cpu=native"]

@@ -43,7 +43,7 @@ cyber-log-parser/
 └── LICENSE                   # Open-source license file
 ```
 
-### Installation and Setup
+## Installation and Setup
 
 To set up the Cyber Log Parser project, follow these steps:
 
