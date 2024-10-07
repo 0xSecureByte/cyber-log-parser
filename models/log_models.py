@@ -1,7 +1,7 @@
 from pydantic import BaseModel
-from datetime import datetime
 
 class LogModel(BaseModel):
-    timestamp: datetime  # Expecting a datetime object
+    timestamp: str       # formatted timestamp e.g., "2024-02-20T12:00:00Z"
     log_level: str       # e.g., "INFO", "ERROR", etc.
     message: str         # The log message content
+
