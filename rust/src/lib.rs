@@ -1,16 +1,20 @@
 use pyo3::prelude::*;
 use pyo3::wrap_pyfunction;
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct LogEntry {
+    timestamp: String,
+    log_level: String,
+    message: String,
+}
 
 #[pyfunction]
 fn parse_log(log: &str) -> PyResult<(String, String, String)> {
-    let parts: Vec<&str> = log.splitn(3, ' ').collect();
-    if parts.len() < 3 {
-        return Err(pyo3::exceptions::PyValueError::new_err("Invalid log format"));
-    }
-    let timestamp = parts[0].to_string();
-    let log_level = parts[1].to_string();
-    let message = parts[2].to_string();
-    Ok((timestamp, log_level, message))
+    let log_entry: LogEntry = serde_json::from_str(log)
+        .map_err(|_| pyo3::exceptions::PyValueError::new_err("Invalid log format"))?;
+    
+    Ok((log_entry.timestamp, log_entry.log_level, log_entry.message))
 }
 
 #[pymodule]
