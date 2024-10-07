@@ -30,6 +30,8 @@ cyber-log-parser/
 │   └── ml_model.py           # Placeholder for ML model (if applicable)
 ├── rust/                     # Rust log parser implementation
 │   ├── src/
+│   │   ├── bin/
+│   │   │   └── benchmark.rs  # Benchmarking tool for Rust log parser
 │   │   ├── main.rs           # Entry point for Rust log parser
 │   │   ├── parser.rs         # Rust log parsing logic
 │   │   └── models.rs         # Data structures in Rust (for logs)
@@ -40,7 +42,6 @@ cyber-log-parser/
 ├── .gitignore                # Ignore unnecessary files (like __pycache__)
 ├── README.md                 # Project documentation
 ├── requirements.txt          # Python dependencies
-├── benchmark.py              # Benchmarking tool for API performance testing
 └── LICENSE                   # Open-source license file
 ```
 
@@ -74,7 +75,7 @@ To set up the Cyber Log Parser project, follow these steps:
    uvicorn api.main:app --reload
    ```
 
-### Usage
+## Usage
 
 #### API Endpoints
 
@@ -128,6 +129,40 @@ The following features are planned for future development:
 ### API Expansion
 
 * Expand API functionality to include features such as search and filter logs, enhancing the user experience and utility of the API.
+
+
+## Benchmarking
+
+The Cyber Log Parser includes a Rust-based benchmarking tool to evaluate the performance of the log parsing API. This tool can simulate a large number of concurrent HTTP requests to the API, providing insights into its performance under load.
+
+### Running the Benchmark
+
+To run the benchmark, follow these steps:
+
+1. **Navigate to the Rust directory**:
+   ```bash
+   cd rust/
+   ```
+
+2. **Execute the benchmark**:
+   Run the benchmark with the desired number of requests and batch size:
+   ```bash
+   cargo run --bin benchmark <number_of_requests> <batch_size>
+   ```
+
+   Replace `<number_of_requests>` with the total number of requests you want to simulate, and `<batch_size>` with the number of concurrent requests to send in each batch.
+
+### Benchmark Output
+
+The benchmark tool provides the following output:
+
+- **Total Time Taken**: The total duration for processing all requests.
+- **Successful Requests**: The number of requests that were successfully processed.
+- **Failed Requests**: The number of requests that failed due to client or server errors. (Depends on the server's load)
+- **Average Time Per Request**: The average time taken to process each request.
+- **Progress Bar**: A visual CLI based representation of the progress of the benchmark.
+
+This tool is useful for stress testing the API and identifying potential bottlenecks or performance issues.
 
 Contributions
 ------------
