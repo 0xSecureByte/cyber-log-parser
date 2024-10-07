@@ -40,6 +40,7 @@ cyber-log-parser/
 ├── .gitignore                # Ignore unnecessary files (like __pycache__)
 ├── README.md                 # Project documentation
 ├── requirements.txt          # Python dependencies
+├── benchmark.py              # Benchmarking tool for API performance testing
 └── LICENSE                   # Open-source license file
 ```
 
@@ -48,28 +49,31 @@ cyber-log-parser/
 To set up the Cyber Log Parser project, follow these steps:
 
 1. **Clone the repository**:
-```bash
-git clone https://github.com/0xSecureByte/cyber-log-parser.git
-cd cyber-log-parser
-```
+   ```bash
+   git clone https://github.com/0xSecureByte/cyber-log-parser.git
+   cd cyber-log-parser
+   ```
+
 2. **Install Python dependencies**:
-```bash
-pip install -r requirements.txt
-```
-3. **Initialize the Rust project**:
-```bash
-cd rust
-cargo build
-```
+   Ensure you have Python 3.7+ installed. Then, install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Build the Rust module using Maturin**:
+   Then, build the Rust components and install them as a Python package:
+   ```bash
+   cd rust
+   maturin develop
+   cd ..
+   ```
+
 4. **Run the FastAPI server**:
-```bash
-uvicorn api.main:app --reload
-```
-5. **Run the Rust log parser**:
-```bash
-cd rust
-cargo run
-```
+   Start the FastAPI server using Uvicorn:
+   ```bash
+   uvicorn api.main:app --reload
+   ```
+
 ### Usage
 
 #### API Endpoints
@@ -77,11 +81,11 @@ cargo run
 The Cyber Log Parser API is accessible at `http://127.0.0.1:8000/`. The following endpoints are available:
 
 * **GET /**: Welcome message
-* **GET /logs/**: Placeholder for log parsing functionality
+* **POST /logs/**: Parse log entries using the Rust-based parser.
 
 #### Parsing Logs via Rust
 
-The Rust-based log parser processes logs based on timestamp, log level, and message. Future work includes integrating the Rust parser into the FastAPI system.
+The Rust-based log parser processes logs based on timestamp, log level, and message.
 
 #### Testing
 
@@ -93,6 +97,7 @@ Run the Python unit tests for the API:
 ```bash
 pytest tests/test_api.py
 ```
+
 ##### Rust Tests
 
 Run the Rust unit tests for the log parser:
