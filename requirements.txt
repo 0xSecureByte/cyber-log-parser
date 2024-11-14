@@ -5,3 +5,4 @@ maturin
 httpx
 asyncio
 tqdm
+python-multipart
